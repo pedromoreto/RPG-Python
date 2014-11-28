@@ -78,6 +78,7 @@ def main():
                 mouseClicou = True
 
         caixaX, caixaY = buscarCaixaNoPixel(mouseX, mouseY)
+        print( "\n X: %s Y: %s \n"%(caixaX, caixaY))
         if caixaX != None and caixaY != None:
             if not caixasReveladas[caixaX][caixaY]:
                 desenhaBordaCaixa(caixaX, caixaY)
@@ -182,7 +183,7 @@ def desenharIcone(forma, cor, caixaX, caixaY):
         pygame.draw.ellipse(TELA, cor, (esquerda, topo + quarto, TAMANHO_CAIXA, metade))
 
 def buscarFormaECor(tabuleiro, caixaX, caixaY):
-    return tabuleiro[caixaX][caixaX][0], tabuleiro[caixaX][caixaY][1]
+    return tabuleiro[caixaX][caixaY][0], tabuleiro[caixaX][caixaY][1]
 
 def desenhaCaixasCobertas(tabuleiro, caixas, cobertas):
     for caixa in caixas:
