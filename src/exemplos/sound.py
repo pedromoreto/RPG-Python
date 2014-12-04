@@ -3,10 +3,10 @@ from pygame.locals import *
 
 pygame.init()
 
-sound = pygame.mixer.Sound("../resources/bow.wav")
+sound = pygame.mixer.Sound("../../resources/bow.wav")
 sound.play()
 
-pygame.mixer.music.load("../resources/peace.mp3")
+pygame.mixer.music.load("../../resources/peace.mp3")
 pygame.mixer.music.play(-1,0.0)
 time.sleep(5)
 

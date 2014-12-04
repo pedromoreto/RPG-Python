@@ -21,7 +21,7 @@ if "-psyco" in sys.argv:
         print ("No psyco for you!  psyco failed to import and run.")
 
 main_dir = os.path.split(os.path.abspath(__file__))[0]
-data_dir = os.path.join(main_dir, '../resources')
+data_dir = os.path.join(main_dir, '../../resources')
 
 
 

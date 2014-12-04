@@ -18,7 +18,7 @@ DOWN = 'down'
 UP = 'up'
 MOVE = 5
 
-heroImg = pygame.image.load("../resources/sprite.png")
+heroImg = pygame.image.load("../../resources/sprite.png")
 heroImg = pygame.transform.scale(heroImg, (64,64))
 
 
