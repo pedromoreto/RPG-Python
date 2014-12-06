@@ -1,6 +1,13 @@
 import sys, pygame
 from pygame.locals import *
 
+_000000 = (0, 0, 0)
+_FFFFFF = (255, 255, 255)
+
+def sairJogo():
+    pygame.quit()
+    sys.exit()
+
 class Jogo():
     _animacaoIntroducao = None
     _menuInicio = None #Cenario com o menu início do jogo
@@ -10,6 +17,11 @@ class Jogo():
     _menuJogo = None #Menu quando o Pause é apertado
     _menuHUD = None #Menu interativo onde pode se alterar itens etc
     _TELA = None
+    _TELA_NOME_JOGO = "Nome do Jogo"
+    _TELA_LARGURA= 800
+    _TELA_ALTURA = 400
+    _COR_FUNDO = _000000
+    _FONTE_MENU = None
     _FPSCLOCK = None
     _FPS = 15
     _irParaProximoCenario = False #Boolean usado para controlar a troca de cenários
@@ -17,6 +29,10 @@ class Jogo():
     def __init__(self):
         pygame.init()
         self._FPSCLOCK = pygame.time.Clock()
+        self._TELA = pygame.display.set_mode((self._TELA_LARGURA, self._TELA_ALTURA),0,0)
+        pygame.display.set_caption(self._TELA_NOME_JOGO)
+        self._FONTE_MENU = pygame.font.Font('freesansbold.ttf', 18)
+        self._menuJogo = MenuJogo(self, self._estadoJogo)
         #Inicializar Variaveis
 
     def getTela(self):
@@ -40,7 +56,8 @@ class Jogo():
             self._animacaoIntroducao(self)
         self._cenarioAtual = self._menuJogo
         while True:
-            if type(self._cenarioAtual) == Cenario:
+            self._TELA.fill(self._COR_FUNDO)
+            if issubclass(Cenario, type(self._cenarioAtual) ):
                 self._cenarioAtual.main()
             if self._irParaProximoCenario:
                 aux = self._cenarioAtual
@@ -74,11 +91,21 @@ class Cenario(CenarioGenerico):
     def main(self):
         for evento in pygame.event.get():
             self.eventos(evento)
-            self._jogo.getMenuHUD().eventos(evento)
+            if self._jogo.getMenuHUD() != None:
+                self._jogo.getMenuHUD().eventos(evento)
         self.logica()
-        self._jogo.getMenuHUD().logica()
+        if self._jogo.getMenuHUD() != None:
+            self._jogo.getMenuHUD().logica()
         self.desenha()
-        self._jogo.getMenuHUD().desenha()
+        if self._jogo.getMenuHUD() != None:
+            self._jogo.getMenuHUD().desenha()
 
+class MenuJogo(Cenario):
+    def eventos(self, evento):
+        if evento.type == QUIT:
+            sairJogo()
+        elif evento.type == KEYDOWN:
+            if evento.key == K_ESCAPE:
+                sairJogo()
 if __name__ == '__main__':
     print("Testando a classe do Jogo")
