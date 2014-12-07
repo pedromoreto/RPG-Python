@@ -1,14 +1,24 @@
-import sys, pygame
+import sys, os, pygame
 from pygame.locals import *
 
 _000000 = (0, 0, 0)
 _FFFFFF = (255, 255, 255)
 _FF0000 = (255, 0, 0)
 
+def lerArquivo(caminho):
+    if os.path.exists(caminho):
+        return caminho
+    elif os.path.exists("../"+caminho):
+        return "../"+caminho
+    else:
+        raise NotADirectoryError("Diretorio %s não encontrado "%caminho)
 
 def stopBgMusic():
     pygame.mixer.music.stop()
 
+def playBgMusic():
+        pygame.mixer.music.load(lerArquivo("resources/sound/menuBg.wav"))
+        pygame.mixer.music.play(-1, 0.0)
 
 def sairJogo():
     stopBgMusic()
@@ -134,20 +144,16 @@ class MenuJogo(Cenario):
     menu = 1
     enterPressionado = False
 
-    def playBgMusic(self):
-        pygame.mixer.music.load("../resources/sound/menuBg.wav")
-        pygame.mixer.music.play(-1, 0.0)
-
     def __init__(self, jogo, estadoJogo):
         Cenario.__init__(self,jogo, estadoJogo)
-        self.playBgMusic()
+        playBgMusic()
 
     def moveMenuSound(self):
-        sound = pygame.mixer.Sound("../resources/sound/open01.wav")
+        sound = pygame.mixer.Sound(lerArquivo("resources/sound/open01.wav"))
         sound.play()
 
     def soundMenuSelected(self):
-        sound = pygame.mixer.Sound("../resources/sound/menuSelected.wav")
+        sound = pygame.mixer.Sound(lerArquivo("resources/sound/menuSelected.wav"))
         sound.play()
 
     def eventos(self, evento):
