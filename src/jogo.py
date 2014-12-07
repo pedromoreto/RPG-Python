@@ -127,6 +127,14 @@ class MenuJogo(Cenario):
 
     menu = 1
 
+    def moveMenuSound(self):
+        sound = pygame.mixer.Sound("../resources/sound/open01.wav")
+        sound.play()
+
+    def soundMenuSelected(self):
+        sound = pygame.mixer.Sound("../resources/sound/menuSelected.wav")
+        sound.play()
+
     def eventos(self, evento):
         if evento.type == QUIT:
             sairJogo()
@@ -135,8 +143,19 @@ class MenuJogo(Cenario):
                 sairJogo()
             elif evento.key == K_UP:
                 self.menu -= 1
+                self.moveMenuSound()
             elif evento.key == K_DOWN:
                 self.menu += 1
+                self.moveMenuSound()
+            elif evento.key == K_RETURN:
+                if self.menu == 3:
+                    sairJogo()
+                elif self.menu == 2:
+                    print("Evento para Carregar o Save")
+                    self.soundMenuSelected()
+                elif self.menu == 1:
+                    print("Evento do Novo Jogo")
+                    self.soundMenuSelected()
         if self.menu < 1:
             self.menu = 3
         elif self.menu > 3:
