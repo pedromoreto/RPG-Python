@@ -5,7 +5,13 @@ _000000 = (0, 0, 0)
 _FFFFFF = (255, 255, 255)
 _FF0000 = (255, 0, 0)
 
+
+def stopBgMusic():
+    pygame.mixer.music.stop()
+
+
 def sairJogo():
+    stopBgMusic()
     pygame.quit()
     sys.exit()
 
@@ -126,6 +132,14 @@ class Cenario(CenarioGenerico):
 class MenuJogo(Cenario):
 
     menu = 1
+
+    def playBgMusic(self):
+        pygame.mixer.music.load("../resources/sound/menuBg.wav")
+        pygame.mixer.music.play(-1, 0.0)
+
+    def __init__(self, jogo, estadoJogo):
+        Cenario.__init__(self,jogo, estadoJogo)
+        self.playBgMusic()
 
     def moveMenuSound(self):
         sound = pygame.mixer.Sound("../resources/sound/open01.wav")
