@@ -132,6 +132,7 @@ class Cenario(CenarioGenerico):
 class MenuJogo(Cenario):
 
     menu = 1
+    enterPressionado = False
 
     def playBgMusic(self):
         pygame.mixer.music.load("../resources/sound/menuBg.wav")
@@ -162,14 +163,7 @@ class MenuJogo(Cenario):
                 self.menu += 1
                 self.moveMenuSound()
             elif evento.key == K_RETURN:
-                if self.menu == 3:
-                    sairJogo()
-                elif self.menu == 2:
-                    print("Evento para Carregar o Save")
-                    self.soundMenuSelected()
-                elif self.menu == 1:
-                    print("Evento do Novo Jogo")
-                    self.soundMenuSelected()
+                self.enterPressionado = True
         if self.menu < 1:
             self.menu = 3
         elif self.menu > 3:
@@ -181,7 +175,16 @@ class MenuJogo(Cenario):
         self._jogo.desenhaTextoSemAlising("Quit", self.getCorMenu(self.menu,3), self._jogo.getLarguraTela()/2 - 70, 536)
 
     def logica(self):
-        print("Logica")
+        if(self.enterPressionado):
+            if self.menu == 3:
+                sairJogo()
+            elif self.menu == 2:
+                print("Evento para Carregar o Save")
+                self.soundMenuSelected()
+            elif self.menu == 1:
+                print("Evento do Novo Jogo")
+                self.soundMenuSelected()
+            self.enterPressionado = False
 
     def getCorMenu(self, valorMenu, valorVermelho):
         if valorMenu == valorVermelho:
