@@ -3,6 +3,7 @@ from pygame.locals import *
 
 _000000 = (0, 0, 0)
 _FFFFFF = (255, 255, 255)
+_FF0000 = (255, 0, 0)
 
 def sairJogo():
     pygame.quit()
@@ -19,7 +20,7 @@ class Jogo():
     _TELA = None
     _TELA_NOME_JOGO = "Nome do Jogo"
     _TELA_LARGURA= 800
-    _TELA_ALTURA = 400
+    _TELA_ALTURA = 600
     _COR_FUNDO = _000000
     _FONTE_MENU = None
     _FPSCLOCK = None
@@ -35,6 +36,15 @@ class Jogo():
         self._menuJogo = MenuJogo(self, self._estadoJogo)
         #Inicializar Variaveis
 
+    def getLarguraTela(self):
+        return self._TELA_LARGURA
+
+    def getAlturaTela(self):
+        return self._TELA_ALTURA
+
+    def getFontMenu(self):
+        return self._FONTE_MENU
+
     def getTela(self):
         return self._TELA
 
@@ -43,6 +53,18 @@ class Jogo():
 
     def getMenuJogo(self):
         return self._menuJogo
+
+    def desenhaTextoSemAlising(self, texto, cor, x, y):
+        desenhoTexto = self.getFontMenu().render(texto, False, cor)
+        desenhoTextoRect = desenhoTexto.get_rect()
+        desenhoTextoRect.topleft = (x, y)
+        self.getTela().blit(desenhoTexto, desenhoTextoRect)
+
+    def desenhaTexto(self, texto, cor, x, y):
+        desenhoTexto = self.getFontMenu().render(texto, True, cor)
+        desenhoTextoRect = desenhoTexto.get_rect()
+        desenhoTextoRect.topleft = (x, y)
+        self.getTela().blit(desenhoTexto, desenhoTextoRect)
 
     def _teste(self):
         '''Método de Teste'''
@@ -57,9 +79,9 @@ class Jogo():
         self._cenarioAtual = self._menuJogo
         while True:
             self._TELA.fill(self._COR_FUNDO)
-            if issubclass(Cenario, type(self._cenarioAtual) ):
+            if isinstance(self._cenarioAtual, Cenario):
                 self._cenarioAtual.main()
-            if self._irParaProximoCenario:
+            if self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario):
                 aux = self._cenarioAtual
                 self._cenarioAtual = self._proximoCenario
                 del aux
@@ -69,6 +91,7 @@ class Jogo():
 class CenarioGenerico():
     _estadoJogo = None
     _jogo = None
+    _mostraHUD = True
 
     def __init__(self, jogo, estadoJogo):
         self._estadoJogo = estadoJogo
@@ -91,21 +114,48 @@ class Cenario(CenarioGenerico):
     def main(self):
         for evento in pygame.event.get():
             self.eventos(evento)
-            if self._jogo.getMenuHUD() != None:
+            if self._mostraHUD and self._jogo.getMenuHUD() != None:
                 self._jogo.getMenuHUD().eventos(evento)
         self.logica()
-        if self._jogo.getMenuHUD() != None:
+        if self._mostraHUD and self._jogo.getMenuHUD() != None:
             self._jogo.getMenuHUD().logica()
         self.desenha()
-        if self._jogo.getMenuHUD() != None:
+        if self._mostraHUD and  self._jogo.getMenuHUD() != None:
             self._jogo.getMenuHUD().desenha()
 
 class MenuJogo(Cenario):
+
+    menu = 1
+
     def eventos(self, evento):
         if evento.type == QUIT:
             sairJogo()
         elif evento.type == KEYDOWN:
             if evento.key == K_ESCAPE:
                 sairJogo()
+            elif evento.key == K_UP:
+                self.menu -= 1
+            elif evento.key == K_DOWN:
+                self.menu += 1
+        if self.menu < 1:
+            self.menu = 3
+        elif self.menu > 3:
+            self.menu = 1
+
+    def desenha(self):
+        self._jogo.desenhaTextoSemAlising("Novo Texto", self.getCorMenu(self.menu,1), self._jogo.getLarguraTela()/2 - 70, 500)
+        self._jogo.desenhaTextoSemAlising("Carregar", self.getCorMenu(self.menu,2), self._jogo.getLarguraTela()/2 - 70, 518)
+        self._jogo.desenhaTextoSemAlising("Quit", self.getCorMenu(self.menu,3), self._jogo.getLarguraTela()/2 - 70, 536)
+
+    def logica(self):
+        print("Logica")
+
+    def getCorMenu(self, valorMenu, valorVermelho):
+        if valorMenu == valorVermelho:
+            return _FF0000
+        else:
+            return _FFFFFF
+
 if __name__ == '__main__':
-    print("Testando a classe do Jogo")
+    jogo = Jogo()
+    jogo.main()
