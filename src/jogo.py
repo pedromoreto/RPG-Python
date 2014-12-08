@@ -209,7 +209,7 @@ class MenuJogo(Cenario):
         corMenuOpcao3 = self.getCorMenu(self.opcoesMenu, 3)
 
         coordenadaXTexto = self._jogo.getLarguraTela() / 2 - 70
-        self._jogo.desenhaTextoSemAlising("Novo Texto", corMenuOpcao1, coordenadaXTexto, 500)
+        self._jogo.desenhaTextoSemAlising("Novo Jogo", corMenuOpcao1, coordenadaXTexto, 500)
         self._jogo.desenhaTextoSemAlising("Carregar", corMenuOpcao2, coordenadaXTexto, 518)
         self._jogo.desenhaTextoSemAlising("Quit", corMenuOpcao3, coordenadaXTexto, 536)
 
