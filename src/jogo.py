@@ -43,6 +43,8 @@ class Jogo():
     _FPSCLOCK = None
     _FPS = 15
     _irParaProximoCenario = False #Boolean usado para controlar a troca de cenários
+    _proximoCenarioPronto = False
+    _pularEventosELogica = False
 
     def __init__(self):
         pygame.init()
@@ -71,14 +73,19 @@ class Jogo():
     def getMenuJogo(self):
         return self._menuJogo
 
+    def isPularEventosELogica(self):
+        return self._pularEventosELogica
+
     def desenhaTextoSemAlising(self, texto, cor, x, y):
-        desenhoTexto = self.getFontMenu().render(texto, False, cor)
-        desenhoTextoRect = desenhoTexto.get_rect()
-        desenhoTextoRect.topleft = (x, y)
-        self.getTela().blit(desenhoTexto, desenhoTextoRect)
+        self._desenhaTextoGenerico( texto, _000000, x+2, y+2, False)
+        self._desenhaTextoGenerico( texto, cor, x, y, False)
 
     def desenhaTexto(self, texto, cor, x, y):
-        desenhoTexto = self.getFontMenu().render(texto, True, cor)
+        self._desenhaTextoGenerico( texto, _000000, x+2, y+2, True)
+        self._desenhaTextoGenerico( texto, cor, x, y, True)
+
+    def _desenhaTextoGenerico(self, texto, cor, x, y, alising):
+        desenhoTexto = self.getFontMenu().render(texto, alising, cor)
         desenhoTextoRect = desenhoTexto.get_rect()
         desenhoTextoRect.topleft = (x, y)
         self.getTela().blit(desenhoTexto, desenhoTextoRect)
@@ -90,7 +97,29 @@ class Jogo():
         self._proximoCenario = proximoCenario
         self._irParaProximoCenario = True
 
+    def _trocaDeCenario(self):
+        global contadorAnimacaoCenario, frameAnimacaoCenario
+        if self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario) and frameAnimacaoCenario < 100:
+            self._pularEventosELogica = True
+            tamanhoQuadrado = frameAnimacaoCenario * int(600 / 100)
+            pygame.draw.rect(self.getTela(), _000000, (0, 0, 800, 600), tamanhoQuadrado)
+            frameAnimacaoCenario += contadorAnimacaoCenario
+            if frameAnimacaoCenario == 100:
+                aux = self._cenarioAtual
+                self._cenarioAtual = self._proximoCenario
+                del aux
+                self._irParaProximoCenario = False
+        if not self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario) and frameAnimacaoCenario > 1:
+            tamanhoQuadrado = frameAnimacaoCenario * int(600 / 100)
+            pygame.draw.rect(self.getTela(), _000000, (0, 0, 800, 600), tamanhoQuadrado)
+            frameAnimacaoCenario -= contadorAnimacaoCenario
+            if frameAnimacaoCenario == 0:
+                self._pularEventosELogica = False
+
     def main(self):
+        global frameAnimacaoCenario, contadorAnimacaoCenario
+        frameAnimacaoCenario = 0
+        contadorAnimacaoCenario = 10
         if type(self._animacaoIntroducao) == type(self._teste):
             self._animacaoIntroducao(self)
         self._cenarioAtual = self._menuJogo
@@ -98,15 +127,7 @@ class Jogo():
             self._TELA.fill(self._COR_FUNDO)
             if isinstance(self._cenarioAtual, Cenario):
                 self._cenarioAtual.main()
-            if self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario):
-                aux = self._cenarioAtual
-                self._cenarioAtual = self._proximoCenario
-                for x in range(1,600,10):
-                    pygame.draw.rect(self.getTela(), _000000, (0, 0, 800, 600),x)
-                    pygame.display.update()
-                pygame.time.wait(200)
-                del aux
-                self._irParaProximoCenario = False
+            self._trocaDeCenario()
             pygame.display.update()
             self._FPSCLOCK.tick(self._FPS)
 
@@ -134,13 +155,14 @@ class CenarioGenerico():
 class Cenario(CenarioGenerico):
 
     def main(self):
-        for evento in pygame.event.get():
-            self.eventos(evento)
+        if not self._jogo.isPularEventosELogica():
+            for evento in pygame.event.get():
+                self.eventos(evento)
+                if self._mostraHUD and self._jogo.getMenuHUD() != None:
+                    self._jogo.getMenuHUD().eventos(evento)
+            self.logica()
             if self._mostraHUD and self._jogo.getMenuHUD() != None:
-                self._jogo.getMenuHUD().eventos(evento)
-        self.logica()
-        if self._mostraHUD and self._jogo.getMenuHUD() != None:
-            self._jogo.getMenuHUD().logica()
+                self._jogo.getMenuHUD().logica()
         self.desenha()
         if self._mostraHUD and  self._jogo.getMenuHUD() != None:
             self._jogo.getMenuHUD().desenha()
@@ -182,12 +204,14 @@ class MenuJogo(Cenario):
             self.opcoesMenu = 1
 
     def desenha(self):
-        self._jogo.desenhaTextoSemAlising("Novo Texto", _000000, self._jogo.getLarguraTela()/2 - 68, 502)
-        self._jogo.desenhaTextoSemAlising("Novo Texto", self.getCorMenu(self.opcoesMenu,1), self._jogo.getLarguraTela()/2 - 70, 500)
-        self._jogo.desenhaTextoSemAlising("Carregar", _000000, self._jogo.getLarguraTela()/2 - 68, 520)
-        self._jogo.desenhaTextoSemAlising("Carregar", self.getCorMenu(self.opcoesMenu,2), self._jogo.getLarguraTela()/2 - 70, 518)
-        self._jogo.desenhaTextoSemAlising("Quit", _000000, self._jogo.getLarguraTela()/2 - 68, 538)
-        self._jogo.desenhaTextoSemAlising("Quit", self.getCorMenu(self.opcoesMenu,3), self._jogo.getLarguraTela()/2 - 70, 536)
+        corMenuOpcao1 = self.getCorMenu(self.opcoesMenu, 1)
+        corMenuOpcao2 = self.getCorMenu(self.opcoesMenu, 2)
+        corMenuOpcao3 = self.getCorMenu(self.opcoesMenu, 3)
+
+        coordenadaXTexto = self._jogo.getLarguraTela() / 2 - 70
+        self._jogo.desenhaTextoSemAlising("Novo Texto", corMenuOpcao1, coordenadaXTexto, 500)
+        self._jogo.desenhaTextoSemAlising("Carregar", corMenuOpcao2, coordenadaXTexto, 518)
+        self._jogo.desenhaTextoSemAlising("Quit", corMenuOpcao3, coordenadaXTexto, 536)
 
     def logica(self):
         if(self.enterPressionado):
