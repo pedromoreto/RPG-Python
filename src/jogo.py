@@ -45,6 +45,8 @@ class Jogo():
     _irParaProximoCenario = False #Boolean usado para controlar a troca de cenários
     _proximoCenarioPronto = False
     _pularEventosELogica = False
+    _frameAnimacaoCenario = None
+    _contadorAnimacaoCenario = None
 
     def __init__(self):
         pygame.init()
@@ -98,28 +100,26 @@ class Jogo():
         self._irParaProximoCenario = True
 
     def _trocaDeCenario(self):
-        global contadorAnimacaoCenario, frameAnimacaoCenario
-        if self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario) and frameAnimacaoCenario < 100:
+        if self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario) and self._frameAnimacaoCenario < 100:
             self._pularEventosELogica = True
-            tamanhoQuadrado = frameAnimacaoCenario * int(600 / 100)
+            tamanhoQuadrado = self._frameAnimacaoCenario * int(600 / 100)
             pygame.draw.rect(self.getTela(), _000000, (0, 0, 800, 600), tamanhoQuadrado)
-            frameAnimacaoCenario += contadorAnimacaoCenario
-            if frameAnimacaoCenario == 100:
+            self._frameAnimacaoCenario += self._contadorAnimacaoCenario
+            if self._frameAnimacaoCenario == 100:
                 aux = self._cenarioAtual
                 self._cenarioAtual = self._proximoCenario
                 del aux
                 self._irParaProximoCenario = False
-        if not self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario) and frameAnimacaoCenario > 1:
-            tamanhoQuadrado = frameAnimacaoCenario * int(600 / 100)
+        if not self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario) and self._frameAnimacaoCenario > 1:
+            tamanhoQuadrado = self._frameAnimacaoCenario * int(600 / 100)
             pygame.draw.rect(self.getTela(), _000000, (0, 0, 800, 600), tamanhoQuadrado)
-            frameAnimacaoCenario -= contadorAnimacaoCenario
-            if frameAnimacaoCenario == 0:
+            self._frameAnimacaoCenario -= self._contadorAnimacaoCenario
+            if self._frameAnimacaoCenario == 0:
                 self._pularEventosELogica = False
 
     def main(self):
-        global frameAnimacaoCenario, contadorAnimacaoCenario
-        frameAnimacaoCenario = 0
-        contadorAnimacaoCenario = 10
+        self._frameAnimacaoCenario = 0
+        self._contadorAnimacaoCenario = 10
         if type(self._animacaoIntroducao) == type(self._teste):
             self._animacaoIntroducao(self)
         self._cenarioAtual = self._menuJogo
