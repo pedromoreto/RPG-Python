@@ -4,6 +4,7 @@ from pygame.locals import *
 _000000 = (0, 0, 0)
 _FFFFFF = (255, 255, 255)
 _FF0000 = (255, 0, 0)
+_0000FF = (0, 0, 255)
 
 def lerArquivo(caminho):
     if os.path.exists(caminho):
@@ -13,15 +14,15 @@ def lerArquivo(caminho):
     else:
         raise NotADirectoryError("Diretorio %s não encontrado "%caminho)
 
-def stopBgMusic():
+def pararMusicaFundoMenu():
     pygame.mixer.music.stop()
 
-def playBgMusic():
+def tocarMusicaFundoMenu():
         pygame.mixer.music.load(lerArquivo("resources/sound/menuBg.wav"))
         pygame.mixer.music.play(-1, 0.0)
 
 def sairJogo():
-    stopBgMusic()
+    pararMusicaFundoMenu()
     pygame.quit()
     sys.exit()
 
@@ -37,7 +38,7 @@ class Jogo():
     _TELA_NOME_JOGO = "Nome do Jogo"
     _TELA_LARGURA= 800
     _TELA_ALTURA = 600
-    _COR_FUNDO = _000000
+    _COR_FUNDO = _0000FF
     _FONTE_MENU = None
     _FPSCLOCK = None
     _FPS = 15
@@ -100,7 +101,12 @@ class Jogo():
             if self._irParaProximoCenario and isinstance(self._proximoCenario, Cenario):
                 aux = self._cenarioAtual
                 self._cenarioAtual = self._proximoCenario
+                for x in range(1,600,10):
+                    pygame.draw.rect(self.getTela(), _000000, (0, 0, 800, 600),x)
+                    pygame.display.update()
+                pygame.time.wait(200)
                 del aux
+                self._irParaProximoCenario = False
             pygame.display.update()
             self._FPSCLOCK.tick(self._FPS)
 
@@ -141,18 +147,18 @@ class Cenario(CenarioGenerico):
 
 class MenuJogo(Cenario):
 
-    menu = 1
+    opcoesMenu = 1
     enterPressionado = False
 
     def __init__(self, jogo, estadoJogo):
         Cenario.__init__(self,jogo, estadoJogo)
-        playBgMusic()
+        tocarMusicaFundoMenu()
 
-    def moveMenuSound(self):
+    def somMudarOpcaoMenu(self):
         sound = pygame.mixer.Sound(lerArquivo("resources/sound/open01.wav"))
         sound.play()
 
-    def soundMenuSelected(self):
+    def somSelecionarMenu(self):
         sound = pygame.mixer.Sound(lerArquivo("resources/sound/menuSelected.wav"))
         sound.play()
 
@@ -163,33 +169,39 @@ class MenuJogo(Cenario):
             if evento.key == K_ESCAPE:
                 sairJogo()
             elif evento.key == K_UP:
-                self.menu -= 1
-                self.moveMenuSound()
+                self.opcoesMenu -= 1
+                self.somMudarOpcaoMenu()
             elif evento.key == K_DOWN:
-                self.menu += 1
-                self.moveMenuSound()
+                self.opcoesMenu += 1
+                self.somMudarOpcaoMenu()
             elif evento.key == K_RETURN:
                 self.enterPressionado = True
-        if self.menu < 1:
-            self.menu = 3
-        elif self.menu > 3:
-            self.menu = 1
+        if self.opcoesMenu < 1:
+            self.opcoesMenu = 3
+        elif self.opcoesMenu > 3:
+            self.opcoesMenu = 1
 
     def desenha(self):
-        self._jogo.desenhaTextoSemAlising("Novo Texto", self.getCorMenu(self.menu,1), self._jogo.getLarguraTela()/2 - 70, 500)
-        self._jogo.desenhaTextoSemAlising("Carregar", self.getCorMenu(self.menu,2), self._jogo.getLarguraTela()/2 - 70, 518)
-        self._jogo.desenhaTextoSemAlising("Quit", self.getCorMenu(self.menu,3), self._jogo.getLarguraTela()/2 - 70, 536)
+        self._jogo.desenhaTextoSemAlising("Novo Texto", _000000, self._jogo.getLarguraTela()/2 - 68, 502)
+        self._jogo.desenhaTextoSemAlising("Novo Texto", self.getCorMenu(self.opcoesMenu,1), self._jogo.getLarguraTela()/2 - 70, 500)
+        self._jogo.desenhaTextoSemAlising("Carregar", _000000, self._jogo.getLarguraTela()/2 - 68, 520)
+        self._jogo.desenhaTextoSemAlising("Carregar", self.getCorMenu(self.opcoesMenu,2), self._jogo.getLarguraTela()/2 - 70, 518)
+        self._jogo.desenhaTextoSemAlising("Quit", _000000, self._jogo.getLarguraTela()/2 - 68, 538)
+        self._jogo.desenhaTextoSemAlising("Quit", self.getCorMenu(self.opcoesMenu,3), self._jogo.getLarguraTela()/2 - 70, 536)
 
     def logica(self):
         if(self.enterPressionado):
-            if self.menu == 3:
+            if self.opcoesMenu == 3:
                 sairJogo()
-            elif self.menu == 2:
+            elif self.opcoesMenu == 2:
                 print("Evento para Carregar o Save")
-                self.soundMenuSelected()
-            elif self.menu == 1:
+                self.somSelecionarMenu()
+            elif self.opcoesMenu == 1:
                 print("Evento do Novo Jogo")
-                self.soundMenuSelected()
+                self.somSelecionarMenu()
+                inicioJogo = Mapa(self._jogo, self._estadoJogo)
+                pararMusicaFundoMenu()
+                self._jogo.trocarCenario(inicioJogo)
             self.enterPressionado = False
 
     def getCorMenu(self, valorMenu, valorVermelho):
@@ -197,6 +209,59 @@ class MenuJogo(Cenario):
             return _FF0000
         else:
             return _FFFFFF
+
+class Mapa(Cenario):
+
+    def __init__(self, jogo, estadoJogo):
+        Cenario.__init__(self,jogo, estadoJogo)
+
+    def voltarAoMenu(self):
+        menuJogo = MenuJogo(self._jogo, self._estadoJogo)
+        self._jogo.trocarCenario(menuJogo)
+
+    def eventos(self, evento):
+        if evento.type == QUIT:
+            self.voltarAoMenu()
+        elif evento.type == KEYDOWN:
+            if evento.key == K_ESCAPE:
+                self.voltarAoMenu()
+        print("Eventos")
+
+    def logica(self):
+        print("logica")
+
+    def desenha(self):
+        print("Desenhando")
+
+class EstadoJogo():
+    _vidaMaxima = None
+    _vidaAtual = None
+    _manaMaxima = None
+    _manaAtual = None
+
+    _ataque = None
+    _defesa = None
+    _forca = None
+    _inteligencia = None
+
+    _experiencia = None
+    _level = None
+
+    _inventario = {}
+    _dinheiro = None
+
+    _arma = None
+    _escudo = None
+    _armadura = None
+    _calca = None
+    _outros = None
+
+    _coordenadaX = None
+    _coordenadaY = None
+    _direcao = None
+
+    #Modificadores quando um baú é aberto por exemplo, não poderá ser aberto novamente
+    _modificadores = {}
 
 if __name__ == '__main__':
     jogo = Jogo()
