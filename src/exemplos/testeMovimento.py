@@ -25,14 +25,17 @@ heroImg.append(pygame.image.load("../../resources/sprites/sprite_2.png"))
 heroImg.append(pygame.image.load("../../resources/sprites/sprite_3.png"))
 heroImg.append(pygame.image.load("../../resources/sprites/sprite_4.png"))
 heroImg.append(pygame.image.load("../../resources/sprites/sprite_5.png"))
-heroImg[0] = pygame.transform.scale(heroImg[0], (64,64))
-heroImg[1] = pygame.transform.scale(heroImg[1], (64,64))
-heroImg[2] = pygame.transform.scale(heroImg[2], (64,64))
-heroImg[3] = pygame.transform.scale(heroImg[3], (64,64))
-heroImg[4] = pygame.transform.scale(heroImg[4], (64,64))
+
+DIMENSAO_HEROI = 64
+
+heroImg[0] = pygame.transform.scale(heroImg[0], (DIMENSAO_HEROI, DIMENSAO_HEROI))
+heroImg[1] = pygame.transform.scale(heroImg[1], (DIMENSAO_HEROI, DIMENSAO_HEROI))
+heroImg[2] = pygame.transform.scale(heroImg[2], (DIMENSAO_HEROI, DIMENSAO_HEROI))
+heroImg[3] = pygame.transform.scale(heroImg[3], (DIMENSAO_HEROI, DIMENSAO_HEROI))
+heroImg[4] = pygame.transform.scale(heroImg[4], (DIMENSAO_HEROI, DIMENSAO_HEROI))
 
 
-incrementoAndar = 3
+incrementoAndar = 5
 animation = True
 # 'left' or 'right'
 direction = 'right'
@@ -72,6 +75,17 @@ while True:
                 y += incrementoAndar
                 print("Down!!!")
                 animation = True
+        elif event.type == pygame.KEYUP:
+            keys = pygame.key.get_pressed()
+            #Quando uma tecla de movimento for acionada a animação irá começar
+            if keys[K_RIGHT]:
+                animation = False
+            if keys[K_LEFT]:
+                animation = False
+            if keys[K_UP]:
+                animation = False
+            if keys[K_DOWN]:
+                animation = False
 
     if x > LARGURA:
         x = -100
