@@ -2,7 +2,7 @@ import sys, pygame
 from pygame.locals import *
 
 pygame.init()
-FPS = 15
+FPS = 30
 LARGURA = 800
 ALTURA = 600
 
@@ -35,8 +35,9 @@ heroImg[3] = pygame.transform.scale(heroImg[3], (DIMENSAO_HEROI, DIMENSAO_HEROI)
 heroImg[4] = pygame.transform.scale(heroImg[4], (DIMENSAO_HEROI, DIMENSAO_HEROI))
 
 
-incrementoAndar = 5
+incrementoAndar = 4
 animation = True
+contadorFrame = 20
 # 'left' or 'right'
 direction = 'right'
 RED = (255, 0, 0, 128)
@@ -52,7 +53,7 @@ while True:
     animation = False
     TELA.fill(BRANCO)
     for event in pygame.event.get():
-        if event.type == QUIT:
+        if event.type == QUIT or ( event.type == KEYDOWN and event.key == K_ESCAPE ):
             pygame.quit()
             sys.exit()
         elif event.type == KEYDOWN:
@@ -116,7 +117,7 @@ while True:
         TELA.blit(quadrado, (x+10, y+5) )
 
     if animation:
-        frameCounter += 90
+        frameCounter += contadorFrame
         if frameCounter > 100:
             frameCounter = 0
             frameUsing += 1
