@@ -39,7 +39,10 @@ incrementoAndar = 5
 animation = True
 # 'left' or 'right'
 direction = 'right'
+RED = (255, 0, 0, 128)
+BRANCO = (255, 255, 255)
 
+showColision = False
 
 pygame.key.set_repeat(1, 10)
 
@@ -47,13 +50,15 @@ while True:
 
     direcaoAtual = direction
     animation = False
-    TELA.fill( (255, 255, 255) )
+    TELA.fill(BRANCO)
     for event in pygame.event.get():
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
         elif event.type == KEYDOWN:
             keys = pygame.key.get_pressed()
+            if keys[K_LSHIFT]:
+                showColision = not showColision
             #Quando uma tecla de movimento for acionada a animação irá começar
             if keys[K_RIGHT]:
                 x += incrementoAndar
@@ -103,8 +108,13 @@ while True:
         heroImg[3] = pygame.transform.flip(heroImg[3], True, False)
         heroImg[4] = pygame.transform.flip(heroImg[4], True, False)
 
-
     TELA.blit(heroImg[frameUsing], (x, y) )
+
+    if showColision:
+        quadrado = pygame.Surface((DIMENSAO_HEROI-20,DIMENSAO_HEROI -5), pygame.SRCALPHA)
+        quadrado.fill(RED)
+        TELA.blit(quadrado, (x+10, y+5) )
+
     if animation:
         frameCounter += 90
         if frameCounter > 100:
