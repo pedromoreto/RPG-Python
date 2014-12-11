@@ -1,0 +1,62 @@
+{
+	"tiles":
+		[{
+			"arquivo": "water.png",
+			"alias":"w",
+			"animacao":true,
+			"bloqueia":true
+		},
+		{
+			"arquivo": "basis.png",
+			"alias":"g",
+			"x":0,
+			"y":8
+		},
+		{
+			"arquivo": "basis.png",
+			"alias":"1",
+			"x":18,
+			"y":15
+		},
+		{
+			"arquivo": "basis.png",
+			"alias":"2",
+			"x":18,
+			"y":16
+		},
+		{
+			"arquivo": "basis.png",
+			"alias":"3",
+			"x":19,
+			"y":15,
+			"bloqueia":true
+		},
+		{
+			"arquivo": "basis.png",
+			"alias":"4",
+			"x":19,
+			"y":16,
+			"bloqueia":true
+		}
+		],
+		"camadas":[
+			[
+				["w","w","w","w","w","w"],
+				["w","w","w","w","w","w"],
+				["w","g","g","g","g","w"],
+				["w","g","g","g","g","w"],
+				["w","g","g","g","g","w"],
+				["w","w","w","w","w","w"],
+				["w","w","w","w","w","w"]
+			],
+			[
+				["","","","","",""],
+				["","","1","2","",""],
+				["","","3","4","",""],
+				["","","","","",""],
+				["","","","","",""],
+				["","","","","",""],
+				["","","","","",""]
+			]
+		]
+}
