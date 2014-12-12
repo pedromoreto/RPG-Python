@@ -30,17 +30,22 @@ def desenhaTile():
 class Tile(pygame.sprite.Sprite):
     _tileset = None
 
-    def __init__(self, imagem, x, y, largura, altura):
+    def __init__(self, imagem, x, y, largura, altura, opacidade = 255):
         pygame.sprite.Sprite.__init__(self)
         self._tileset = pygame.image.load(imagem).convert()
-        tile = pygame.Surface([largura, altura]).convert()
+        tile = pygame.Surface([largura, altura],pygame.SRCALPHA).convert()
         # Copiar o sprite da imagem na posição X e Y com largura e altura
         tile.blit(self._tileset, (0, 0), (x, y, largura, altura))
         COR_TRANSPARENCIA = (0, 0, 0)
         tile.set_colorkey(COR_TRANSPARENCIA)
+        tile.set_alpha(opacidade)
         self.image = tile.convert()
         self.image = pygame.transform.scale(self.image, (64, 64))
         self.rect = self.image.get_rect()
+
+    def setPosition(self, x, y):
+        self.rect.x = x
+        self.rect.y = y
 
 class Heroi(pygame.sprite.Sprite):
     _estadoJogo = None
@@ -64,8 +69,14 @@ class Heroi(pygame.sprite.Sprite):
         self.frames[3] = pygame.transform.flip(self.frames[3], True, False)
         self.frames[4] = pygame.transform.flip(self.frames[4], True, False)
 
-    def __init__(self):
+    def set_position(self, x, y):
+        self.rect.x = x
+        self.rect.y = y
+
+    def __init__(self, x):
+
         pygame.sprite.Sprite.__init__(self)
+        self.x = x
 
         self.frames.append(pygame.image.load("../../resources/sprites/sprite_1.png"))
         self.frames.append(pygame.image.load("../../resources/sprites/sprite_2.png"))
@@ -97,20 +108,47 @@ class Heroi(pygame.sprite.Sprite):
             self.atualizaLado(self)
         self.image = self.frames[self._frameAtual]
 
+        # Teste para ver se embaixo de um telhado ou arvore é mais bacana aplicar transparência no herói ou no tile
+        # Ideal seria pintar o herói sem transparencia primeiro, e depois de desenhar os tiles redesenhar ele com uma transparência
+        COR_TRANSPARENCIA = (0, 0, 0)
+        self.image.set_colorkey(COR_TRANSPARENCIA)
+        self.image.set_alpha(100)
+        self.image = self.image.convert()
+
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
 
 FPS = 30
 fpsClock = pygame.time.Clock()
 
-heroi = Heroi()
+heroi = Heroi(1)
+heroi.set_position(200, 0)
 grupoHeroi = pygame.sprite.Group(heroi)
 
 x = 16 * 19
 y = 16 * 9
 largura = 16
 altura = largura
-grupoTile = pygame.sprite.Group(Tile("../../resources/map/basis.png", x, y, largura, largura ))
+tile1 = Tile("../../resources/map/basis.png", x, y, largura, largura )
+tile2 = Tile("../../resources/map/tiled01.png", (16*0), (16* 15), largura, largura)
+tile3 = Tile("../../resources/map/tiled01.png", (16*0), (16* 14), largura, largura, 200)
+
+tile4 = Tile("../../resources/map/tiled01.png", (16*0), (16* 14), largura, largura)
+tile5 = Tile("../../resources/map/tiled01.png", (16*0), (16* 15), largura, largura )
+
+tile4.setPosition(200,0)
+tile5.setPosition(200,64)
+
+
+
+tile2.setPosition(100,64)
+tile3.setPosition(100,0)
+grupoTile = pygame.sprite.Group()
+grupoTile.add(tile1)
+grupoTile.add(tile2)
+grupoTile.add(tile3)
+grupoTile.add(tile4)
+grupoTile.add(tile5)
 pygame.key.set_repeat(1, 10)
 
 while True:
@@ -122,8 +160,11 @@ while True:
             sys.exit()
 
     grupoHeroi.update()
-    grupoHeroi.draw(TELA)
+
     grupoTile.draw(TELA)
+    grupoHeroi.draw(TELA)
+
+
 
     pygame.display.update()
     fpsClock.tick(FPS)
