@@ -5,6 +5,7 @@ import json
 # Teste Quebra é lançado (raise) uma AssertionError
 # assert False , 'Erro do Mal'
 
+
 with open("../../resources/map/mapa1.json") as arquivoJson:
     data = json.load(arquivoJson)
     print(data)

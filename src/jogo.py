@@ -1,6 +1,5 @@
-import sys, os, pygame, json, src.spritesheet
+import sys, os, pygame, json
 from pygame.locals import *
-from src.spritesheet import *
 
 _000000 = (0, 0, 0)
 _FFFFFF = (255, 255, 255)
