@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="210mm"
+   height="297mm"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.4 r9939"
+   sodipodi:docname="sprite.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient4225">
+      <stop
+         style="stop-color:#fcd78e;stop-opacity:0.81366462;"
+         offset="0"
+         id="stop4227" />
+      <stop
+         style="stop-color:#deb970;stop-opacity:1;"
+         offset="1"
+         id="stop4229" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4145">
+      <stop
+         style="stop-color:#0d0c09;stop-opacity:1;"
+         offset="0"
+         id="stop4147" />
+      <stop
+         style="stop-color:#0d0c09;stop-opacity:0;"
+         offset="1"
+         id="stop4149" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4137">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4139" />
+      <stop
+         style="stop-color:#000000;stop-opacity:0;"
+         offset="1"
+         id="stop4141" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient4121">
+      <stop
+         style="stop-color:#e00202;stop-opacity:1;"
+         offset="0"
+         id="stop4123" />
+      <stop
+         style="stop-color:#950202;stop-opacity:1;"
+         offset="1"
+         id="stop4125" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4058">
+      <stop
+         style="stop-color:#552200;stop-opacity:1;"
+         offset="0"
+         id="stop4060" />
+      <stop
+         style="stop-color:#552200;stop-opacity:0;"
+         offset="1"
+         id="stop4062" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4058"
+       id="radialGradient4064"
+       cx="485.63083"
+       cy="83.878426"
+       fx="485.63083"
+       fy="83.878426"
+       r="8.8134532"
+       gradientTransform="matrix(4.0700409,0.44775183,-0.28653714,2.6046077,-1466.8722,-352.03406)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4058-2"
+       id="radialGradient4064-4"
+       cx="485.63083"
+       cy="83.878426"
+       fx="485.63083"
+       fy="83.878426"
+       r="8.8134537"
+       gradientTransform="matrix(4.0700409,0.44775183,-0.28653714,2.6046077,-1466.8722,-352.03406)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       id="linearGradient4058-2">
+      <stop
+         style="stop-color:#552200;stop-opacity:1;"
+         offset="0"
+         id="stop4060-3" />
+      <stop
+         style="stop-color:#552200;stop-opacity:0;"
+         offset="1"
+         id="stop4062-0" />
+    </linearGradient>
+    <radialGradient
+       r="8.8134537"
+       fy="83.878426"
+       fx="485.63083"
+       cy="83.878426"
+       cx="485.63083"
+       gradientTransform="matrix(4.0700409,0.44775183,-0.28653714,2.6046077,-1500.9649,-352.2866)"
+       gradientUnits="userSpaceOnUse"
+       id="radialGradient4081"
+       xlink:href="#linearGradient4058-2"
+       inkscape:collect="always" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4121"
+       id="linearGradient4127"
+       x1="423.78439"
+       y1="68.726143"
+       x2="497.47473"
+       y2="23.269276"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4137"
+       id="radialGradient4143"
+       cx="485.63083"
+       cy="83.878426"
+       fx="485.63083"
+       fy="83.878426"
+       r="8.8134532"
+       gradientTransform="matrix(5.1261288,5.6627765e-7,-4.6498727e-7,4.2092154,-2003.7753,-269.18422)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4145"
+       id="radialGradient4151"
+       cx="451.53818"
+       cy="83.625885"
+       fx="451.53818"
+       fy="83.625885"
+       r="8.8134532"
+       gradientTransform="matrix(3.8362744,0.04759256,-0.05673145,4.5729294,-1275.942,-320.27924)"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4225"
+       id="linearGradient4239"
+       x1="499.71136"
+       y1="86.64283"
+       x2="429.83029"
+       y2="86.14283"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4225"
+       id="linearGradient4275"
+       gradientUnits="userSpaceOnUse"
+       x1="499.71136"
+       y1="86.64283"
+       x2="429.83029"
+       y2="86.14283" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4137"
+       id="radialGradient4277"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(5.1261288,5.6627765e-7,-4.6498727e-7,4.2092154,-2003.7753,-269.18422)"
+       cx="485.63083"
+       cy="83.878426"
+       fx="485.63083"
+       fy="83.878426"
+       r="8.8134532" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4145"
+       id="radialGradient4279"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="matrix(3.8362744,0.04759256,-0.05673145,4.5729294,-1275.942,-320.27924)"
+       cx="451.53818"
+       cy="83.625885"
+       fx="451.53818"
+       fy="83.625885"
+       r="8.8134532" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4121"
+       id="linearGradient4281"
+       gradientUnits="userSpaceOnUse"
+       x1="423.78439"
+       y1="68.726143"
+       x2="497.47473"
+       y2="23.269276" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4142136"
+     inkscape:cx="413.73391"
+     inkscape:cy="888.88511"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1297"
+     inkscape:window-height="744"
+     inkscape:window-x="63"
+     inkscape:window-y="24"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Camada 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       style="fill:#552200;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       d="m 429.33662,176.21948 78.00293,3.9624 36.02777,-8.9495 75.60415,-45.2311 3.73137,15.02126 -76.09102,45.35204 -34.56718,8.58668 -78.97665,-3.72052 z"
+       id="rect4322"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="ccccccccc"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864" />
+    <image
+       y="38.789295"
+       x="104.31767"
+       id="image2995"
+       xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAPCAYAAADUFP50AAAABHNCSVQICAgIfAhkiAAAAQdJREFU
+KJG1krFKA0EQhr+dO2PyAFZiEbAUtAlWFmnyADaWKYLvcbWG5AkCgbyDRRDE+qqAclYWok8Qi4Dr
+jcWx58a9bOff7TDfvzv/DvyXpsbo1Bj9WzcxAODM/Lb0y7I+pLsgB3R3GAegu+nieVwV9g8AeD8e
+NjuM+m0FEBG1xUQ7rURtMVH7utBOKwlmFIC9ttHi47uGAdar27pp/TJvfurXRk3+ZgPXmLZSFREF
+6I2q8uF9yecwYZnZIP0gHAf5GmSpnpzmcRAgn2lg8LTqscysqUOMT1Lp6DHl7uqmDm/2sNl2dV8h
+Inp+nehl1+ggS1VE1E8cGlbOBeSr9FYtKh9uMgL4AVTmWl882SeRAAAAAElFTkSuQmCC
+"
+       height="200.12854"
+       width="202.57143" />
+    <g
+       id="g4267"
+       transform="translate(7.5,-1.5)"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864">
+      <g
+         id="g4261">
+        <rect
+           style="fill:url(#linearGradient4275);fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+           id="rect2985-5"
+           width="72.118919"
+           height="49.655651"
+           x="428.21136"
+           y="61.315002" />
+        <g
+           id="g4100">
+          <rect
+             y="78.575127"
+             x="479.31738"
+             height="10.606602"
+             width="12.626906"
+             id="rect4048"
+             style="fill:url(#radialGradient4277);fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+          <rect
+             y="78.322586"
+             x="445.22473"
+             height="10.606602"
+             width="12.626906"
+             id="rect4048-8"
+             style="fill:url(#radialGradient4279);fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+        </g>
+      </g>
+      <path
+         sodipodi:nodetypes="ccccc"
+         inkscape:connector-curvature="0"
+         id="rect4104"
+         d="m 427.31482,55.2604 c 27.88197,-2.359061 58.20841,-4.717638 84.83252,-29.71828 l 0,48.992397 c -1.38633,-10.992898 -18.95485,-15.761872 -89.90358,0 z"
+         style="fill:url(#linearGradient4281);fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1" />
+    </g>
+    <g
+       transform="matrix(0.70767704,-0.27708645,0.27708645,0.70767704,177.14807,149.3234)"
+       id="g4197-1"
+       inkscape:transform-center-y="27.719918"
+       inkscape:transform-center-x="-11.291081"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864">
+      <rect
+         style="fill:#376503;fill-opacity:1;stroke:#000000;stroke-width:6.57904024;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect4153-9-3"
+         width="20.046169"
+         height="59.046169"
+         x="409.22693"
+         y="120.3391" />
+      <rect
+         y="188.12096"
+         x="408.73544"
+         height="13.322614"
+         width="22.285881"
+         id="rect2985-5-6-9"
+         style="fill:#fcd78e;fill-opacity:1;stroke:#000000;stroke-width:6.57904005;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <rect
+       style="fill:#72afcf;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4325"
+       width="196.5"
+       height="9.5"
+       x="362.09229"
+       y="287.45667"
+       transform="matrix(0.95810362,-0.28642182,0.28642182,0.95810362,0,0)"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864" />
+    <g
+       id="g4157"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864">
+      <rect
+         y="119.86218"
+         x="438"
+         height="57"
+         width="59.5"
+         id="rect4153"
+         style="fill:#376503;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+      <rect
+         y="120.36218"
+         x="460.5"
+         height="56"
+         width="18"
+         id="rect4155"
+         style="fill:#522101;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <g
+       id="g4197"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864">
+      <rect
+         style="fill:#376503;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+         id="rect4153-9"
+         width="20.046169"
+         height="59.046169"
+         x="409.22693"
+         y="120.3391" />
+      <rect
+         y="184.95088"
+         x="407.85706"
+         height="13.322614"
+         width="22.285881"
+         id="rect2985-5-6"
+         style="fill:#fcd78e;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none" />
+    </g>
+    <rect
+       style="fill:#550000;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4241"
+       width="17.5"
+       height="29.5"
+       x="438.5"
+       y="183.36218"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864" />
+    <rect
+       style="fill:#550000;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none"
+       id="rect4241-2"
+       width="17.5"
+       height="29.5"
+       x="479.25"
+       y="183.11218"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864" />
+    <path
+       style="fill:#552200;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1"
+       d="m 439.5,221.86218 18.59142,-2.20633 20.90858,19.70633 -15,8.5 -23.5,-15 z"
+       id="rect4301"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864" />
+    <path
+       style="fill:#552200;fill-opacity:1;stroke:#000000;stroke-width:5;stroke-miterlimit:4;stroke-opacity:1"
+       d="m 479.75,220.46535 18.59142,-2.20633 20.90858,19.70633 -15,8.5 -23.5,-15 z"
+       id="rect4301-9"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cccccc"
+       inkscape:export-filename="/home/nenodias/Arquivos/workspace-python/RPG-Python/resources/sprites/teste.png"
+       inkscape:export-xdpi="24.770864"
+       inkscape:export-ydpi="24.770864" />
+  </g>
+</svg>

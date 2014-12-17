@@ -5,7 +5,7 @@ from requests.api import head
 
 pygame.init()
 
-TELA = pygame.display.set_mode((800, 600), 0, 0)
+TELA = pygame.display.set_mode((800, 600))
 pygame.display.set_caption("Teste Sprite")
 
 def desenhaTile():
@@ -73,10 +73,9 @@ class Heroi(pygame.sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
 
-    def __init__(self, x):
+    def __init__(self):
 
         pygame.sprite.Sprite.__init__(self)
-        self.x = x
 
         self.frames.append(pygame.image.load("../../resources/sprites/sprite_1.png"))
         self.frames.append(pygame.image.load("../../resources/sprites/sprite_2.png"))
@@ -121,7 +120,7 @@ BLUE = (0, 0, 255)
 FPS = 30
 fpsClock = pygame.time.Clock()
 
-heroi = Heroi(1)
+heroi = Heroi()
 heroi.set_position(200, 0)
 grupoHeroi = pygame.sprite.Group(heroi)
 

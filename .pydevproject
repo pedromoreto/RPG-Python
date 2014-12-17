@@ -6,4 +6,7 @@
 <path>/${PROJECT_DIR_NAME}</path>
 <path>/${PROJECT_DIR_NAME}/src</path>
 </pydev_pathproperty>
+<pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
+<path>/home/nenodias/Arquivos/pygame/build/lib.linux-x86_64-3.4/pygame</path>
+</pydev_pathproperty>
 </pydev_project>
