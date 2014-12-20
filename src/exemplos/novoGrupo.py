@@ -6,8 +6,10 @@ pygame.init()
 class TileSprite(pygame.sprite.Sprite):
     #utilizar o self.rect para colisões
     _tileset = None
-    posicaoTile = None
+    posicao_tile = None
     frames = []
+    animation = False
+    
     def __init__(self, *args, **kwargs):
         super(TileSprite, self).__init__()
         if len(args) == 3:    
@@ -27,14 +29,24 @@ class TileSprite(pygame.sprite.Sprite):
         self.image = tile.convert()
         self.image = pygame.transform.scale(self.image, (64, 64))
         self.rect = self.image.get_rect()
-        self.posicaoTile = self.image.get_rect()
+        self.posicao_tile = self.image.get_rect()
     
     def posicao(self,  *args, **kwargs):
         if type(args[0]) == pygame.Rect:
-            self.posicaoTile = args[0]
+            self.posicao_tile = args[0]
         elif len(args) == 2:
-            self.posicaoTile.x = args[0]
-            self.posicaoTile.y = args[1] 
+            self.posicao_tile.x = args[0]
+            self.posicao_tile.y = args[1]
+            
+    def set_mask(self, color, opacity = 255):
+        cor_final = color[0],color[1],color[2], opacity
+        self.image.set_masks((1000,1000,1000,255))
+#         self.image.fill(cor_final)
+        self.image.convert()
+        print("setting a Mask")
+    
+    def appendAnimation(self, animation):
+        print("Appending an animation")
 
 class GrupoSprites(pygame.sprite.Group):
     def __init__(self, *args, **kwargs):
@@ -43,7 +55,7 @@ class GrupoSprites(pygame.sprite.Group):
     def draw(self, *args, **kwargs):
         superficie = args[0]
         for tile in self.sprites():
-            superficie.blit(tile.image, tile.posicaoTile)
+            superficie.blit(tile.image, tile.posicao_tile)
 
 
 def executaTeste():
@@ -52,6 +64,7 @@ def executaTeste():
 #     BLACK = (0, 0, 0)
 #     WHITE = (255, 255, 255)
     BLUE = (0, 0, 255)
+    RED = (0, 110, 0, 100)
     ALTURA = 600
     LARGURA = 800
     TELA = pygame.display.set_mode((LARGURA, ALTURA),)
@@ -61,7 +74,8 @@ def executaTeste():
     largura = 16
     altura = largura
     tile1 = TileSprite("../../resources/map/basis.png", pygame.Rect(x, y, largura, altura) )
-    grupoTile = GrupoSprites(tile1)
+    grupo_tile = GrupoSprites(tile1)
+    tile1.set_mask(RED)
     contador = 0
     while True:
         TELA.fill(BLUE)
@@ -74,8 +88,8 @@ def executaTeste():
         contador += 5
         if contador > LARGURA:
             contador = -50
-        grupoTile.update()
-        grupoTile.draw(TELA)
+        grupo_tile.update()
+        grupo_tile.draw(TELA)
 
         pygame.display.update()
         fpsClock.tick(FPS)
