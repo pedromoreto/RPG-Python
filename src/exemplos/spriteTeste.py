@@ -1,3 +1,4 @@
+# *-* coding: utf-8 *-*
 import  pygame, sys
 from pygame.locals import *
 from requests.api import head
@@ -42,6 +43,7 @@ class Tile(pygame.sprite.Sprite):
         self.image = tile.convert()
         self.image = pygame.transform.scale(self.image, (64, 64))
         self.rect = self.image.get_rect()
+        
 
     def setPosition(self, x, y):
         self.rect.x = x
@@ -93,7 +95,9 @@ class Heroi(pygame.sprite.Sprite):
         self.image = self.frames[0]
 
         self.rect = self.image.get_rect()
-        self.rect.x = 100
+        self.rect.width = 30
+        self.rect.height = 60
+        self.rect.x = 100 + 20
 
     def update(self):
         print("Update Hero")
@@ -110,10 +114,12 @@ class Heroi(pygame.sprite.Sprite):
 
         # Teste para ver se embaixo de um telhado ou arvore é mais bacana aplicar transparência no herói ou no tile
         # Ideal seria pintar o herói sem transparencia primeiro, e depois de desenhar os tiles redesenhar ele com uma transparência
-        COR_TRANSPARENCIA = (0, 0, 0)
-        self.image.set_colorkey(COR_TRANSPARENCIA)
-        self.image.set_alpha(100)
-        self.image = self.image.convert()
+        #COR_TRANSPARENCIA = (0, 0, 0)
+        #self.image.set_colorkey(COR_TRANSPARENCIA)
+        #self.image.set_alpha(100)
+        #self.image = self.image.convert()
+
+RED = (255, 0, 0)
 
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
@@ -122,7 +128,7 @@ FPS = 30
 fpsClock = pygame.time.Clock()
 
 heroi = Heroi(1)
-heroi.set_position(200, 0)
+heroi.set_position(150, 0)
 grupoHeroi = pygame.sprite.Group(heroi)
 
 x = 16 * 19
@@ -149,6 +155,10 @@ grupoTile.add(tile2)
 grupoTile.add(tile3)
 grupoTile.add(tile4)
 grupoTile.add(tile5)
+
+grupoTile2 = pygame.sprite.Group()
+grupoTile2.add(tile2)
+grupoTile2.add(tile3)
 pygame.key.set_repeat(1, 10)
 
 while True:
@@ -163,6 +173,11 @@ while True:
 
     grupoTile.draw(TELA)
     grupoHeroi.draw(TELA)
+    pygame.draw.rect(TELA, RED, tile3.rect,1)
+
+    if pygame.sprite.groupcollide(grupoHeroi, grupoTile2, False, False):
+        pygame.draw.rect(TELA, RED, heroi.rect,1)
+        print("Colisao entre os grupos: grupoHeroi + grupoTile2")
 
 
 
